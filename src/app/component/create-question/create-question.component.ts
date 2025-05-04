@@ -98,7 +98,7 @@ export class CreateQuestionComponent {
   submitAllQuestions(): void {
     const payload = this.questions.value;
     console.log(payload);
-    this.http.post(`https://localhost:44363/api/Question?QuizId=${this.quizId}`, payload).subscribe({
+    this.http.post(`https://hanyadib606.bsite.net/api/Question?QuizId=${this.quizId}`, payload).subscribe({
       next: () => alert('Questions submitted!'),
       error: (err) => console.error('Submission failed:', err),
     });
