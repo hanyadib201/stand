@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
   imports: [CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule],
+    RouterModule,FormsModule],
   templateUrl: './create-question.component.html',
   styleUrl: './create-question.component.css'
 })
@@ -96,6 +96,7 @@ export class CreateQuestionComponent {
   }
 
   submitAllQuestions(): void {
+    console.log(" helllllllllllllo");
     const payload = this.questions.value;
     console.log(payload);
     this.http.post(`https://hanyadib606.bsite.net/api/Question?QuizId=${this.quizId}`, payload).subscribe({
@@ -103,6 +104,14 @@ export class CreateQuestionComponent {
       error: (err) => console.error('Submission failed:', err),
     });
   }
+  // submitAllQuestions(): void {
+  //   console.log("تم الضغط على الزر - الاختبار البسيط");
+  //   alert("يعمل الزر!");
+  // }
+  // testButton() {
+  //   console.log('الزر التجريبي يعمل');
+  //   alert('الزر التجريبي يعمل');
+  // }
   getQuestionFormGroup(index: number): FormGroup {
     return this.questions.at(index) as FormGroup;
   }

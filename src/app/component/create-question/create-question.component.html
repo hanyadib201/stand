@@ -2,7 +2,7 @@
     <img src="https://garasform.garassolutions.com//Competitions/20240111213542379_CompetetionLogo_scaled_4a490428-abdd-41ce-8ac5-0a87b52cf2c4.jpg" width="100%" height="auto" alt="Logo" />
     <h2 class="mb-4">Add Questions to Quiz</h2>
   
-    <form (ngSubmit)="submitAllQuestions()">
+    <form (ngSubmit)="submitAllQuestions()" >
       <div *ngFor="let q of questions.controls; let i = index" [formGroup]="getQuestionFormGroup(i)" class="card mb-4">
         <div class="card-body">
           <h5 class="card-title">Question {{ i + 1 }}</h5>
@@ -67,7 +67,9 @@
   
       <button type="button" class="btn btn-outline-success mb-3" (click)="addQuestion()">+ Add Another Question</button>
       <br />
+
       <button class="btn btn-success" type="submit">Submit All Questions</button>
+
     </form>
   </div>
   
