@@ -79,7 +79,7 @@ export class CreateQuestionComponent {
     const questionGroup = this.questions.at(index) as FormGroup;
     const type = questionGroup.get('type')?.value;
 
-    if (type === 'true-false' || type === 'fill-blank') {
+    if (type === 'true-false' || type === 'fill-blank' || type === 'pictureSummry' || type === 'pdfSummry' || type === 'youtubeSummry') {
       questionGroup.setControl('options', this.fb.array([]));
     } else {
       const optionsControl = questionGroup.get('options');
@@ -96,7 +96,7 @@ export class CreateQuestionComponent {
   }
 
   submitAllQuestions(): void {
-    console.log(" helllllllllllllo");
+    //console.log(" helllllllllllllo");
     const payload = this.questions.value;
     console.log(payload);
     this.http.post(`https://hanyadib606.bsite.net/api/Question?QuizId=${this.quizId}`, payload).subscribe({

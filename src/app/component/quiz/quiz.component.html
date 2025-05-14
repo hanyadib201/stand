@@ -39,6 +39,30 @@
             <input type="text" [(ngModel)]="userAnswers[question.id]" [name]="'q' + question.id"
               placeholder="اكتب الإجابة هنا...">
           </div>
+
+
+<!-- Picture Summary -->
+<div *ngIf="question.type === 'pictureSummry'" class="media-summary">
+  <img [src]="question.url" alt="Picture summary" style="max-width: 100%; height: auto;" />
+  <textarea [(ngModel)]="userAnswers[question.id]" [name]="'q' + question.id" placeholder="اكتب ملخصك هنا..." rows="5" style="width: 100%;"></textarea>
+</div>
+
+<!-- PDF Summary -->
+<div *ngIf="question.type === 'pdfSummry'" class="media-summary">
+  <embed [src]="sanitizeUrl(question.url)" type="application/pdf" width="100%" height="500px" />
+  <textarea [(ngModel)]="userAnswers[question.id]" [name]="'q' + question.id" placeholder="اكتب ملخصك هنا..." rows="5" style="width: 100%;"></textarea>
+</div>
+
+<!-- YouTube Summary -->
+<div *ngIf="question.type === 'youtubeSummry'" class="media-summary">
+  <iframe [src]="getYouTubeEmbedUrl(question.url)" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+  <textarea [(ngModel)]="userAnswers[question.id]" [name]="'q' + question.id" placeholder="اكتب ملخصك هنا..." rows="5" style="width: 100%;"></textarea>
+</div>
+
+
+
+
+
   
           <!-- Multiple Choice Question -->
           <div *ngIf="question.type === 'multiple-choice' " class="options">

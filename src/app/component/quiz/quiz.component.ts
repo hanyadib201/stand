@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserAnswer } from '../../Models/user-answer';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-quiz',
@@ -24,7 +25,8 @@ export class QuizComponent implements OnInit {
 
   constructor(
     private quizService: QuizService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -140,6 +142,24 @@ export class QuizComponent implements OnInit {
   
     // Optionally, you can reset other state variables as needed
     this.isSubmitted = false;
+  }
+
+
+
+   sanitizeUrl(url: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
+  extractYouTubeId(url: string | null): string {
+    if (!url) return '';
+    const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+    const match = url.match(regExp);
+    return match && match[1] ? match[1] : '';
+  }
+
+  getYouTubeEmbedUrl(videoUrl: string | null): SafeResourceUrl {
+    const videoId = this.extractYouTubeId(videoUrl || '');
+    return this.sanitizeUrl(`https://www.youtube.com/embed/${videoId}`);
   }
 
 }

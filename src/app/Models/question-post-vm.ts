@@ -5,5 +5,6 @@ export interface QuestionPostVM { id: number;
     quizId: number;
     type: string;
     correctTextAnswer?: string;
+    url?: string;
     options?: OptionCreate[];
 }

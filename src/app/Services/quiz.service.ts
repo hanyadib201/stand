@@ -9,7 +9,7 @@ import { UserAnswer } from '../Models/user-answer';
 })
 export class QuizService {
 
-  // private apiUrl = 'https://localhost:44363/api/Quizzes/QuizId';
+   //private apiUrl = 'https://localhost:44355/api/Quizzes/QuizId';
   private apiUrl = 'https://hanyadib606.bsite.net/api/Quizzes/QuizId';
 
   constructor(private http: HttpClient) { }
@@ -26,8 +26,10 @@ export class QuizService {
 
   submitUserAnswers(data: UserAnswer) {
     return this.http.post('https://hanyadib606.bsite.net/api/UserAnswers', data);
+    // return this.http.post('https://localhost:44355/api/UserAnswers', data);
   }
   getQuestionsWithAnswers(quizId: number) {
     return this.http.get(`https://hanyadib606.bsite.net/api/UserAnswers?QuizId=${quizId}`);
+   // return this.http.get(`https://localhost:44355/api/UserAnswers?QuizId=${quizId}`);
   }
 }
